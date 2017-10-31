@@ -27,7 +27,8 @@ if ($month < 1) {
 	$month = $month - 12;
 }
 
-$kalender = new Kalendar($year, $month);
+
+$kalender = new Kalendar($year, $month, $config);
 
 //for ($i=0; $i<count($kalender->entries); $i++){
 //	$entry = $kalender->entries[$i];
@@ -37,7 +38,7 @@ $kalender = new Kalendar($year, $month);
 
 <html>
 <head>
-<title>Paris Reservationen</title>
+<title>Menton Reservationen</title>
 <style type="text/css">
 td.wrongmonth {
 	background-color: #BCADB0;border: 1px solid #888;
@@ -130,7 +131,7 @@ function changeEndValues(unit) {
 	style="border: 1px solid #888; width: 1000px; margin: 0 auto; background-color: #F5F1DE; text-align: left;">
 <div style="text-align: center;">
 	<!--img src="../pix/titelbild.png" /-->
-	<h1>PARIS</h1>
+	<h1>MENTON</h1>
 </div>
 
 <div

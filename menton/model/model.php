@@ -41,9 +41,11 @@ class Kalendar {
 	public $year;
 	public $month;
 	public $entries;
-	function __construct($y, $m) {
+	public $config;
+	function __construct($y, $m, $config) {
 		$this->month = $m;
 		$this->year = $y;
+		$this->config = $config;
 		$this->load();
 	}
 
@@ -62,7 +64,7 @@ class Kalendar {
 
 	function addEntries() {
 		$entMgr = new EntityMgr();
-		$this->entries = $entMgr->loadEntriesOfPeriod($this->days[0][0]->date, $this->days[4][6]->date);
+		$this->entries = $entMgr->loadEntriesOfPeriod($this->days[0][0]->date, $this->days[4][6]->date, $this->config);
 		if ($this->entries == 0) {
 			return;
 		}
@@ -96,8 +98,8 @@ class EntityMgr {
 
 	}
 	
-	function loadEntriesOfPeriod($firstDay, $lastDay) {
-		$query = "SELECT * FROM users_paris as u, paris_entries as e";
+	function loadEntriesOfPeriod($firstDay, $lastDay, $config) {
+	    $query = "SELECT * FROM ".$config['users']." as u, ".$config['entries']." as e";
 		$query = $query." WHERE e.user = u.name AND ((e.begin >=".$firstDay." AND e.begin <= ".$lastDay.") OR (e.end >=".$firstDay." AND e.end <=".$lastDay."))";
 		$res = mysql_query($query) or die(mysql_error());
 		$numrows=mysql_num_rows($res);
